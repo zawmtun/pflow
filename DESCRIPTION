@@ -1,11 +1,10 @@
 Package: pflow
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Setup a project for data analysis
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Zaw Myo Tun
+Maintainer: Zaw Myo Tun <zawmyotun11@gmail.com>
+Description: Contains functions for setting up a project and helper functions to reduce friction for data analysis.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
