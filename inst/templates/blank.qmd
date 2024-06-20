@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+author: "Report Author"
+date: today
+date-format: "D MMM YYYY"
+format:
+  docx:
+    toc: true
+    toc-title: Contents
+    reference-doc: pflow_reference.docx
+editor_options: 
+  chunk_output_type: console
+execute: 
+  echo: false
+---
+
+\newpage
+
+```{r}
+#| label: setup
+#| include: false
+# qmd is knitted in a new R session, so load libraries here.
+source(here::here("packages.R"))
+```
+
+## Analysis
