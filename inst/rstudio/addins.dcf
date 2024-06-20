@@ -1,0 +1,4 @@
+Name: Source packages.R
+Description: Load all packages in packages.R
+Binding: pflow_load_packages
+Interactive: false
