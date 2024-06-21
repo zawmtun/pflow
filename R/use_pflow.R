@@ -115,7 +115,7 @@ use_docx <- function(file_name, pflow_path = NULL) {
   if (!file.exists(refdoc_path)) {
     doc <- file.path(lib_path, "pflow/templates/pflow_reference.docx")
     file.copy(doc, refdoc_path)
-    message(glue::glue("\nWord reference document added: {refdoc_path}"))
+    message(glue::glue("\n\nWord reference document added: {refdoc_path}"))
   }
 
   if (file.exists("./packages.R") && !contains_quarto("./packages.R")) {
