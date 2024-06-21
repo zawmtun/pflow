@@ -28,7 +28,7 @@ devtools::install_github("zawmtun/pflow")
 |_ packages.R
 ```
 
-`pflow::use_code("plotting")` creates a R code file:
+`pflow::use_code("plotting")` creates a template R code file:
 
 ```
 ✔ Writing 'code/plotting.R'
@@ -37,7 +37,7 @@ Add this code to your _main.R:
 source("code/plotting.R")
 ```
 
-`pflow::use_docx("analysis")`:
+`pflow::use_docx("analysis")` creates a template QMD file for DOCX output:
 
 ```
 ✔ Writing 'docs/analysis.qmd'
