@@ -44,6 +44,8 @@ source("code/plotting.R")
 Add this code to your _main.R:
 
 quarto_render("docs/analysis.qmd", output_format = "docx")
+
+Word reference document added: docs/pflow_reference.docx
 ```
 
 ## Defaults
