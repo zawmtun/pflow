@@ -5,7 +5,7 @@
 
 <!-- badges: end -->
 
-\{pflow\} R package is a collection of functions for setting up a project and for reducing friction of a data analysis process. Some of the functions in this package are direct adaption from [Miles McBain's {tflow} package](https://github.com/MilesMcBain/tflow/tree/master).
+\{pflow\} R package is a collection of functions for setting up a project and for reducing friction of a data analysis process. Some of the functions in this package are adapted from [Miles McBain's {tflow} package](https://github.com/MilesMcBain/tflow/tree/master).
 
 ## Installation
 
