@@ -37,24 +37,22 @@ Add this code to your _main.R:
 source("code/plotting.R")
 ```
 
-`pflow::use_docx("analysis")` creates a template QMD file for DOCX output:
+`pflow::use_docx("my_report1")` creates a template QMD file for DOCX output:
 
 ```
-✔ Writing 'docs/analysis.qmd'
+✔ Writing 'docs/my_report1.qmd'
 Add this code to your _main.R:
 
-quarto_render("docs/analysis.qmd", output_format = "docx")
+quarto_render("docs/my_report1.qmd", output_format = "docx")
 
 Word reference document added: docs/pflow_reference.docx
 ```
 
-## Defaults
-
-\{tidyverse\} library call is included in `packages.R` by default. Some dplyr function names are often conflicted with other packages. These conflicts are pre-emptively avoided by using \{conflicted\} package.
+`pflow::use_html("my_report2")` creates a template QMD file for HTML output:
 
 ```
-library(tidyverse)
-library(conflicted)
-conflict_prefer("select", "dplyr")
-conflict_prefer("filter", "dplyr")
+✔ Writing 'docs/my_report2.qmd'
+Add this code to your _main.R:
+
+quarto_render("docs/my_report2.qmd", output_format = "html")
 ```
