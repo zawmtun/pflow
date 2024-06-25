@@ -2,18 +2,18 @@
 % Please edit documentation in R/use_pflow.R
 \name{use_docx}
 \alias{use_docx}
-\title{Create a QMD file and generate a file path}
+\title{Create a QMD file for a DOCX file and generate a file path}
 \usage{
 use_docx(file_name, pflow_path = NULL)
 }
 \arguments{
 \item{file_name}{of the QMD file}
 
-\item{pflow_path}{path of \{pflow\} package. If NULL, the first of .libPaths() is used.}
+\item{pflow_path}{path of \{pflow\} package where the Word reference template document is stored. The templated will be copied in the same location as the QMD document. If NULL, the first of .libPaths() is used.}
 }
 \value{
 the path of the file created (invisibly).
 }
 \description{
-Create a QMD file pre-configured to generate a docx file. It also creates a custom Word template file if it does not already exist.
+Create a QMD file pre-configured to generate a DOCX file. It also creates a custom Word template file if it does not already exist.
 }

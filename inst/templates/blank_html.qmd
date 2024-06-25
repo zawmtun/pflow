@@ -4,17 +4,15 @@ author: "Report Author"
 date: today
 date-format: "D MMM YYYY"
 format:
-  docx:
+  html:
     toc: true
     toc-title: Contents
-    reference-doc: pflow_reference.docx
+    embed-resources: true
 editor_options: 
   chunk_output_type: console
 execute: 
   echo: false
 ---
-
-\newpage
 
 ```{r}
 #| label: setup
@@ -23,4 +21,28 @@ execute:
 source(here::here("packages.R"))
 ```
 
+```{r}
+#| label: load-data
+#| include: false
+
+# Read in pre-processed data typically in RDS format.
+
+```
+
+
 ## Analysis
+
+
+## Reproducibility
+
+<details><summary>Reproducibility details</summary>
+
+```{r}
+# datetime
+Sys.time()
+
+# session info
+sessionInfo()
+```
+
+</details>

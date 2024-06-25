@@ -63,10 +63,11 @@ use_code <- function(file_name) {
 #' Generate a QMD file path
 #'
 #' @param file_name of the QMD file
+#' @param output_format_type of the QMD file; either 'docx' or 'html'
 #'
 #' @return a QMD file path in console
 #'
-qmd_target <- function(file_name) {
+qmd_target <- function(file_name, output_format_type) {
 
   report_dir <- getOption('pflow.report_dir') %||% "docs"
 
@@ -74,17 +75,17 @@ qmd_target <- function(file_name) {
              "\n",
              "quarto_render(",
              "\"{file.path(report_dir, paste(file_name, 'qmd', sep = '.'))}\"",
-             ", output_format = \"docx\")")
+             ", output_format = \"{output_format_type}\")")
 }
 
 
-#' Create a QMD file and generate a file path
+#' Create a QMD file for a DOCX file and generate a file path
 #'
 #' @description
-#' Create a QMD file pre-configured to generate a docx file. It also creates a custom Word template file if it does not already exist.
+#' Create a QMD file pre-configured to generate a DOCX file. It also creates a custom Word template file if it does not already exist.
 #'
 #' @param file_name of the QMD file
-#' @param pflow_path path of \{pflow\} package. If NULL, the first of .libPaths() is used.
+#' @param pflow_path path of \{pflow\} package where the Word reference template document is stored. The templated will be copied in the same location as the QMD document. If NULL, the first of .libPaths() is used.
 #'
 #' @return the path of the file created (invisibly).
 #' @export
@@ -97,17 +98,17 @@ use_docx <- function(file_name, pflow_path = NULL) {
 
   if (file.exists(file_path)) {
     message(file_path, " already exists and was not overwritten.")
-    message(qmd_target(file_name))
+    message(qmd_target(file_name, output_format_type = "docx"))
     return(invisible(file_path))
   }
 
   if (!dir.exists(report_dir)) usethis::use_directory(report_dir)
 
-  usethis::use_template("blank.qmd",
+  usethis::use_template("blank_docx.qmd",
                         save_as = file_path,
                         package = "pflow")
 
-  message(qmd_target(file_name))
+  message(qmd_target(file_name, output_format_type = "docx"))
 
   refdoc_path <- file.path(report_dir, "pflow_reference.docx")
   lib_path <- pflow_path %||% .libPaths()[1]
@@ -117,6 +118,48 @@ use_docx <- function(file_name, pflow_path = NULL) {
     file.copy(doc, refdoc_path)
     message(glue::glue("\n\nWord reference document added: {refdoc_path}"))
   }
+
+  if (file.exists("./packages.R") && !contains_quarto("./packages.R")) {
+    packages <- readr::read_lines("./packages.R")
+    packages <- c(packages, "library(quarto)")
+    readr::write_lines(packages, "./packages.R")
+    message("Writing 'library(quarto)' to './packages.R'")
+  }
+
+  invisible(file_path)
+
+}
+
+
+#' Create a QMD file for a HTML file and generate a file path
+#'
+#' @description
+#' Create a QMD file pre-configured to generate a HTML file.
+#'
+#' @param file_name of the QMD file
+#'
+#' @return the path of the file created (invisibly).
+#' @export
+#'
+use_html <- function(file_name) {
+
+  target_file <- paste0(file_name, ".qmd")
+  report_dir <- getOption('pflow.report_dir') %||% "docs"
+  file_path <- file.path(report_dir, target_file)
+
+  if (file.exists(file_path)) {
+    message(file_path, " already exists and was not overwritten.")
+    message(qmd_target(file_name, output_format_type = "html"))
+    return(invisible(file_path))
+  }
+
+  if (!dir.exists(report_dir)) usethis::use_directory(report_dir)
+
+  usethis::use_template("blank_html.qmd",
+                        save_as = file_path,
+                        package = "pflow")
+
+  message(qmd_target(file_name, output_format_type = "html"))
 
   if (file.exists("./packages.R") && !contains_quarto("./packages.R")) {
     packages <- readr::read_lines("./packages.R")
