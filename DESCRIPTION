@@ -1,7 +1,7 @@
 Package: pflow
 Type: Package
-Title: Setup a project for data analysis
-Version: 0.1.0
+Title: A collection of functions desinged to streamline the data analysis workflow
+Version: 0.2.0
 Author: Zaw Myo Tun
 Maintainer: Zaw Myo Tun <zawmyotun11@gmail.com>
 Description: Contains functions for setting up a project and helper functions to reduce friction for data analysis.
@@ -11,5 +11,7 @@ LazyData: true
 Imports:
   usethis,
   glue,
-  readr
-RoxygenNote: 7.3.1
+  readr,
+  officer,
+  rmarkdown
+RoxygenNote: 7.3.2
