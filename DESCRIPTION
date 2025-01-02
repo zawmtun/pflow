@@ -13,7 +13,8 @@ Imports:
   glue,
   readr,
   officer,
-  rmarkdown
+  rmarkdown,
+  cli
 Suggests:
   testthat (>= 3.0.0),
   withr
