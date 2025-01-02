@@ -21,11 +21,37 @@ body_add_blank_lines <- function(doc, n = 1) {
 #' @param department Author's department within SCRI
 #' @param report_date Reporting date in the format "dd-mm-yyyy". If not provided, the system's date is used.
 #'
+#' @details
+#' Here is the output of example 1:\cr
+#' \if{html}{
+#'   \figure{titlepage_example1.png}{options: style="width:60\%" alt="Screenshot of function output"}
+#' }
+#' \if{latex}{
+#'   \figure{titlepage_example1.png}{options: width=10cm}
+#' }
+#'
+#' Here is the output of example 2:\cr
+#' \if{html}{
+#'   \figure{titlepage_example2.png}{options: style="width:60\%" alt="Screenshot of function output"}
+#' }
+#' \if{latex}{
+#'   \figure{titlepage_example2.png}{options: width=10cm}
+#' }
+#'
 #' @returns A 'Word' object from \{officer\} package
 #' @export
 #'
 #' @examples
 #' \dontrun{
+#' # Example 1: A title page requires three parameters at a minimum.
+#' create_title_page(
+#'   project_name = "Test Project",
+#'   title = "Test Title",
+#'   author = "Test Author"
+#' ) |>
+#' print("titlepage.docx")
+#'
+#' # Example 2: Including optional parameters
 #' create_title_page(
 #'   project_name = "Test Project",
 #'   title = "Test Title",
@@ -34,7 +60,10 @@ body_add_blank_lines <- function(doc, n = 1) {
 #'   department = "Research Department",
 #'   report_date = "01-01-2024"
 #' )
+#' ) |>
+#' print("titlepage.docx")
 #' }
+#'
 create_title_page <- function(project_name, title, author,
                               designation = NULL,
                               department = NULL,
@@ -56,10 +85,16 @@ create_title_page <- function(project_name, title, author,
   author_par <- officer::ftext(author, prop = author_properties) |>
     officer::fpar(fp_p = par_properties)
 
+  # Get the package-correct path to the image
+  img_path <- system.file("images", "scri_logo.png", package = "pflow")
+  if (img_path == "") {
+    stop("Could not find the logo file. Please ensure 'scri_logo.png' is installed in package's 'images' directory")
+  }
+
   # Initialise document and add project_name, title, and author
   doc <- officer::read_docx() |>
     body_add_blank_lines(n = 2) |>
-    officer::body_add_img(src = "Picture1.png",
+    officer::body_add_img(src = img_path,
                  style = "centered",
                  height = 2.36 * 1.3 * 0.393701,
                  width = 3.61 * 1.3 * 0.393701,
@@ -94,9 +129,8 @@ create_title_page <- function(project_name, title, author,
     is.null(report_date),
     Sys.Date(),
     as.Date(report_date, "%d-%m-%Y")
-  ) |> as.Date()
-
-  cat(class(report_date))
+  ) |>
+    as.Date()
 
   date_par <- officer::fpar(
     officer::ftext(format(report_date, "%e %B %Y")),

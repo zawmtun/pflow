@@ -32,8 +32,34 @@ A 'Word' object from \{officer\} package
 \description{
 Create a title page of a report as a 'Word' object
 }
+\details{
+Here is the output of example 1:\cr
+\if{html}{
+  \figure{titlepage_example1.png}{options: style="width:60\%" alt="Screenshot of function output"}
+}
+\if{latex}{
+  \figure{titlepage_example1.png}{options: width=10cm}
+}
+
+Here is the output of example 2:\cr
+\if{html}{
+  \figure{titlepage_example2.png}{options: style="width:60\%" alt="Screenshot of function output"}
+}
+\if{latex}{
+  \figure{titlepage_example2.png}{options: width=10cm}
+}
+}
 \examples{
 \dontrun{
+# Example 1: A title page requires three parameters at a minimum.
+create_title_page(
+  project_name = "Test Project",
+  title = "Test Title",
+  author = "Test Author"
+) |>
+print("titlepage.docx")
+
+# Example 2: Including optional parameters
 create_title_page(
   project_name = "Test Project",
   title = "Test Title",
@@ -42,5 +68,8 @@ create_title_page(
   department = "Research Department",
   report_date = "01-01-2024"
 )
+) |>
+print("titlepage.docx")
 }
+
 }
