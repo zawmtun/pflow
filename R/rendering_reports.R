@@ -88,7 +88,10 @@ create_title_page <- function(project_name, title, author,
   # Get the package-correct path to the image
   img_path <- system.file("images", "scri_logo.png", package = "pflow")
   if (img_path == "") {
-    stop("Could not find the logo file. Please ensure 'scri_logo.png' is installed in package's 'images' directory")
+    cli::cli_abort(c(
+      "Could not find the logo file.",
+      "Please ensure 'scri_logo.png' is installed in package's 'images' directory"
+    ))
   }
 
   # Initialise document and add project_name, title, and author
@@ -169,20 +172,17 @@ create_title_page <- function(project_name, title, author,
 #' }
 
 render_report <- function(rmd_file, add_title_page = FALSE) {
-  stopifnot(
-    "`add_title_page` must be either a `logical` or a `list`" =
-      class(add_title_page) %in% c("logical", "list")
-  )
+  if (!class(add_title_page) %in% c("logical", "list")) {
+    cli::cli_abort("`add_title_page` must be either a `logical` or a `list`")
+  }
 
   if (is.logical(add_title_page) && add_title_page) {
-    stop("To add a title page, please provide a list containing at least `project_name`, `title`, and `author`, instead of `TRUE`")
+    cli::cli_abort("To add a title page, please provide a list containing at least `project_name`, `title`, and `author`, instead of `TRUE`")
   }
 
   if (is.list(add_title_page)) {
-    stopifnot(
-      "`add_title_page` must contain at least 3 elements: `project_name`, `title`, and `author`" =
-        all(c("project_name", "title", "author") %in% names(add_title_page))
-    )
+    if (!all(c("project_name", "title", "author") %in% names(add_title_page)))
+      cli::cli_abort("`add_title_page` must contain at least 3 elements: `project_name`, `title`, and `author`")
   }
 
   # Define output file path
